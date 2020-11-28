@@ -29,8 +29,20 @@ function isValid(s) {
     let arr = s.split('');
     let test = []
     let count = 1;
+    let low;
+    for(let i = 0; i < arr.length; i++){
+        for(let j = 0; j < arr.length; j++){
+            if(arr[i] <= arr[j]){
+                low = arr[i];
+                arr[i] = arr[j];
+                arr[j] = low;
+            }
+        } 
+    }
     for(let i=0; i<arr.length; i++){
-        s[i] == s[i+1] ? count++ : (test.push(count), (count = 1));
+        for(let j=1; j<=arr.length; j++){
+            arr[i] == arr[j] ? (count++) : (test.push(count), (count = 1), arr.splice(0,j), (j = 0))
+        }
     }
     let lowest = test[0];
     let highest = test[0];   
